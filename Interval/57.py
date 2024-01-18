@@ -10,6 +10,7 @@ class Solution:
         #        stk.append(interval)
         #return stk
         
+        #1. add not related intervals
         stk = []
         n = len(intervals)
         index = n
@@ -19,12 +20,13 @@ class Solution:
             else:
                 index = i
                 break
-    
+        #2. merge with new intervals
         if len(stk) > 0 and newInterval[0] <= stk[len(stk) - 1][1]:
             stk[len(stk) - 1][1] = max(stk[len(stk) - 1][1], newInterval[1])
         else:
             stk.append(newInterval)
-            
+           
+        #3. merge the rest intervals
         for i in range(index, n):
             interval = intervals[i]
             if len(stk) > 0 and interval[0] <= stk[len(stk) - 1][1]:
